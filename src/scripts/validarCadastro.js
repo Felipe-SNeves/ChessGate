@@ -38,7 +38,7 @@ function validar () {
     return false;
   }
 
-  if (telefone.value == "" || telefone.value.length < 8 || telefone.value.length > 9) {
+  if (telefone.value == "" || telefone.value.length < 8 || telefone.value.length > 9 || isNaN(telefone.value)) {
     alert ("Informe um número de telefone válido!");
     telefone.value = "";
     telefone.focus ();

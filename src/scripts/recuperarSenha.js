@@ -8,4 +8,5 @@ function recuperar () {
     }
 
     alert(email.value);
+    $(".modal").modal('hide');
 }
