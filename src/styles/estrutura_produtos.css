@@ -148,7 +148,7 @@ body {
 
     .container-fluid #cabecalho #menu_superior_esquerda {
         margin-left: 2.5%;
-        width: 35%;
+        width: 50%;
         display: inline-table;
     }
 
@@ -157,8 +157,7 @@ body {
     }
     
     .container-fluid #cabecalho #menu_superior_direita {
-        width: 60%;
-        margin-right: auto;
+        width: 40%;
         display: inline-table;
         text-align: right;
     }
