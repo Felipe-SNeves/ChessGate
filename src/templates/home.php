@@ -3,14 +3,12 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Carrinho</title>
+        <title>ChessGate</title>
         <link rel="shortcut icon" href="../../assets/images/icons/logo_icone.svg" type="image/svg" />
-        <meta name="description" content="Carrinho de produtos da ChessGate" />
-        <meta name="keywords" content="xadrez loja tabuleiro chaveiro decorativo livro produtos carrinho" />
+        <meta name="description" content="Home da ChessGate, a maior e melhor loja de artigos enxadrístico do país" />
+        <meta name="keywords" content="xadrez loja tabuleiro chaveiro decorativo livro" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../styles/estilos.css" />
-        <script lang="javascript" type="text/javascript" src="../scripts/alterarEntrega.js"></script>
-        <script lang="javascript" type="text/javascript" src="../scripts/limparEntrega.js"></script>
         <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
         <!-- Inserção do Bootstrap -->
@@ -28,7 +26,7 @@
             <header>
                 <div id="cabecalho">
                     <div id="menu_superior_esquerda">
-                        <a href="home.html">
+                        <a href="home.php">
                             <img src="../../assets/images/icons/logo_icone.svg" type="image/svg" alt="Logomarca" />
                             ChessGate
                         </a>
@@ -40,7 +38,7 @@
                             </form>
                             <img src="../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
-                        <a href="conta/entrar.html">
+                        <a href="conta/entrar.php">
                             <img src="../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
                             Entrar
                         </a>
@@ -49,32 +47,32 @@
                 <div id="menu_navegacao">
                     <ul class="nav justify-content-center">
                         <li id="link_home" class="nav-item">
-                            <a class="nav-link" href="home.html">Home</a>
+                            <a class="nav-link" href="home.php">Home</a>
                         </li>
                         <li id="link_partidas" class="nav-item">
-                            <a class="nav-link" href="partidas.html">Partidas</a>
+                            <a class="nav-link" href="partidas.php">Partidas</a>
                         </li>
                         <li id="link_produtos" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="produtos/tabuleiros.html">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="produtos/livros.html">Livros</a></li>
-                                    <li><a class="dropdown-item" href="produtos/decorativos.html">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="produtos/chaveiros.html">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/tabuleiros.php">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/livros.php">Livros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/decorativos.php">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="produtos/chaveiros.php">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li id="link_carrinho" class="nav-item">
-                            <a class="nav-link" href="carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="carrinho.php">Carrinho</a>
                         </li>
                         <li id="link_conta" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="conta/entrar.html">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="conta/perfil.html">Meus dados</a></li>
+                                    <li><a class="dropdown-item" href="conta/entrar.php">Entrar</a></li>
+                                    <li><a class="dropdown-item" href="conta/perfil.php">Meus dados</a></li>
                                     <li><a class="dropdown-item" href="#">Sair</a></li>
                                 </ul>
                             </div>
@@ -85,88 +83,107 @@
 
             <main>
                 <div id="conteudo">
-                    <div id="lista_itens">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Produto</th>
-                                    <th scope="col">Quantidade</th>
-                                    <th scope="col">Preço</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr scope="row">
-                                    <td>Tabuleiro oriental</td>
-                                    <td>1</td>
-                                    <td>R$ 99,99</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Chaveiro real</td>
-                                    <td>2</td>
-                                    <td>R$ 79,98</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Meu sistema</td>
-                                    <td>1</td>
-                                    <td>119,99</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Tabuleiro clássico</td>
-                                    <td>1</td>
-                                    <td>89,99</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="preco_total">
-                        <div class="card">
-                            <div class="card-header">
-                                Finalizar compra
+                    <p>Confira as novidades que a ChessGate preparou para você!</p>
+                    
+                    <div id="carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <div id="op_box" style="position: relative;">
+                                    <img src="../../assets/images/products/Tabuleiros/tabuleiro_oriental.jpg" type="image/jpg" alt="Tabuleiro Oriental">
+                                    <div class="back_image">
+                                        <div class="conteudo_image">
+                                            <a target="new" href="produtos/tabuleiros/tabuleiro_oriental.php">Clique aqui para ver mais</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-none d-md-block">
+                                    <br />
+                                    <h5>Tabuleiro Oriental</h5>
+                                    <p>Trace as suas estratégias nas estepes asiáticas</p>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Preço total</h5>
-                                <p class="card-text">O preço total da compra é de R$ 179,97</p>
-                                <a href="#" class="btn" style="background-color: #b98753;">Pagar</a>
-                                <a href="#" class="btn" style="background-color: #b98753;">Limpar</a>
+
+                            <div class="carousel-item">
+                                <div id="op_box" style="position: relative;">
+                                    <img src="../../assets/images/products/Tabuleiros/tabuleiro_madeira.jpg" type="image/jpg" alt="Tabueleiro de madeira">
+                                    <div class="back_image">
+                                        <div class="conteudo_image">
+                                            <a target="new" href="produtos/tabuleiros/tabuleiro_classico.php">Clique aqui para ver mais</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-none d-md-block">
+                                    <br />
+                                    <h5>Tabuleiro Clássico</h5>
+                                    <p>Nada melhor que o clássico</p>
+                                </div>
                             </div>
+
+                            <div class="carousel-item">
+                                <div id="op_box" style="position: relative;">
+                                    <img src="../../assets/images/products/Decorativos/Decorativo2.jpg" type="image/jpg" alt="Decorativo rei">
+                                    <div class="back_image">
+                                        <div class="conteudo_image">
+                                            <a target="new" href="produtos/decorativos/rei_prateado.php">Clique aqui para ver mais</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-none d-md-block">
+                                    <br />
+                                    <h5>Rei prateado</h5>
+                                    <p>Nada melhor que um rei para decorar sua casa</p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div id="op_box" style="position: relative;">
+                                    <img src="../../assets/images/products/Chaveiro/Chaveiro2.jpg" type="image/jpg" alt="Chaveiro rei">
+                                    <div class="back_image">
+                                        <div class="conteudo_image">
+                                            <a target="new" href="produtos/chaveiros/chaveiro_real.php">Clique aqui para ver mais</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-none d-md-block">
+                                    <br />
+                                    <h5>Chaveiro real</h5>
+                                    <p>Leve a realeza contigo para todo lugar</p>
+                                </div>
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>  
+                            </button>
+
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                            
                         </div>
                     </div>
-                    <div id="endereco_entrega">
-                        <div class="card">
-                            <div class="card-header">
-                                Endereço de entrega
-                            </div>
-                            <div class="card-body" style="text-align: left;">
-                                <p class="card-text">Os produtos serão entregues no endereço abaixo. Caso deseje altera-lo clique no botão "Alterar endereço"!</p>
-                                <form>
-                                    <label for="enderecoEntrega" class="form-label">Endereço de entrega</label>
-                                    <input type="text" maxlength="40" class="form-control" id="enderecoEntrega" value="" readonly />
-                                </form>
-                                <button style="background-color: #b98753; margin-top: 1%;" id="btn_alterar" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#trocarEndereco">
-                                    Alterar endereço
-                                </button>
-                            </div>
-                    </div>       
                 </div>
             </main>
 
             <footer>
-                <div id="rodape">
+                <div id="rodape" class="home_rodape">
                     <div id="conteudo_rodape">
                         <div id="p_col">
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
-                                <li><a href="home.html">Home</a></li>
-                                <li><a href="conta/perfil.html">Conta</a></li>
-                                <li><a href="produtos/tabuleiros.html">Tabuleiros</a></li>
+                                <li><a href="home.php">Home</a></li>
+                                <li><a href="conta/perfil.php">Conta</a></li>
+                                <li><a href="produtos/tabuleiros.php">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="produtos/livros.html">Livros</a></li>
-                                <li><a href="produtos/decorativos.html">Decorativos</a></li>
-                                <li><a href="produtos/chaveiros.html">Chaveiros</a></li>
-                                <li><a href="partidas.html">Partidas</a></li>
+                                <li><a href="produtos/livros.php">Livros</a></li>
+                                <li><a href="produtos/decorativos.php">Decorativos</a></li>
+                                <li><a href="produtos/chaveiros.php">Chaveiros</a></li>
+                                <li><a href="partidas.php">Partidas</a></li>
                             </ul>
                         </div>
                     </div>
@@ -297,24 +314,3 @@
         alert(busca.value);
     }
 </script>
-
-<div class="modal fade" id="trocarEndereco" tabindex="-1" role="dialog" style="z-index: 1500;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Alterar endereço de entrega</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" arial-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Informe o endereço de entrega para essa compra. Caso deseje fazer essa alteração <b>permanentemente</b>, mude o endereço associado a sua conta na <b>página de perfil!</b></p>
-                <input type="text" id="endereco_novo" class="form-control" maxlength="40" required placeholder="Informe o endereço de entrega" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" onclick="alterarEndereco ();" class="btn btn-success">Alterar endereço</button>
-            </div>
-        </div>
-    </div>
-</div>

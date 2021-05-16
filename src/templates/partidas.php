@@ -3,10 +3,10 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>ChessGate</title>
+        <title>Partidas</title>
         <link rel="shortcut icon" href="../../assets/images/icons/logo_icone.svg" type="image/svg" />
-        <meta name="description" content="Home da ChessGate, a maior e melhor loja de artigos enxadrístico do país" />
-        <meta name="keywords" content="xadrez loja tabuleiro chaveiro decorativo livro" />
+        <meta name="description" content="Assista a LiChess TV pela ChessGate e muito mais!" />
+        <meta name="keywords" content="xadrez loja tabuleiro chaveiro decorativo livro produtos carrinho lichess tv puzzle partidas" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../styles/estilos.css" />
         <!-- JQuery -->
@@ -26,7 +26,7 @@
             <header>
                 <div id="cabecalho">
                     <div id="menu_superior_esquerda">
-                        <a href="home.html">
+                        <a href="home.php">
                             <img src="../../assets/images/icons/logo_icone.svg" type="image/svg" alt="Logomarca" />
                             ChessGate
                         </a>
@@ -38,7 +38,7 @@
                             </form>
                             <img src="../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
-                        <a href="conta/entrar.html">
+                        <a href="conta/entrar.php">
                             <img src="../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
                             Entrar
                         </a>
@@ -47,32 +47,32 @@
                 <div id="menu_navegacao">
                     <ul class="nav justify-content-center">
                         <li id="link_home" class="nav-item">
-                            <a class="nav-link" href="home.html">Home</a>
+                            <a class="nav-link" href="home.php">Home</a>
                         </li>
                         <li id="link_partidas" class="nav-item">
-                            <a class="nav-link" href="partidas.html">Partidas</a>
+                            <a class="nav-link" href="partidas.php">Partidas</a>
                         </li>
                         <li id="link_produtos" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="produtos/tabuleiros.html">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="produtos/livros.html">Livros</a></li>
-                                    <li><a class="dropdown-item" href="produtos/decorativos.html">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="produtos/chaveiros.html">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/tabuleiros.php">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/livros.php">Livros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/decorativos.php">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="produtos/chaveiros.php">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li id="link_carrinho" class="nav-item">
-                            <a class="nav-link" href="carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="carrinho.php">Carrinho</a>
                         </li>
                         <li id="link_conta" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="conta/entrar.html">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="conta/perfil.html">Meus dados</a></li>
+                                    <li><a class="dropdown-item" href="conta/entrar.php">Entrar</a></li>
+                                    <li><a class="dropdown-item" href="conta/perfil.php">Meus dados</a></li>
                                     <li><a class="dropdown-item" href="#">Sair</a></li>
                                 </ul>
                             </div>
@@ -83,107 +83,38 @@
 
             <main>
                 <div id="conteudo">
-                    <p>Confira as novidades que a ChessGate preparou para você!</p>
-                    
-                    <div id="carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-
-                            <div class="carousel-item active">
-                                <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Tabuleiros/tabuleiro_oriental.jpg" type="image/jpg" alt="Tabuleiro Oriental">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/tabuleiros/tabuleiro_oriental.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-none d-md-block">
-                                    <br />
-                                    <h5>Tabuleiro Oriental</h5>
-                                    <p>Trace as suas estratégias nas estepes asiáticas</p>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Tabuleiros/tabuleiro_madeira.jpg" type="image/jpg" alt="Tabueleiro de madeira">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/tabuleiros/tabuleiro_classico.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-none d-md-block">
-                                    <br />
-                                    <h5>Tabuleiro Clássico</h5>
-                                    <p>Nada melhor que o clássico</p>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Decorativos/Decorativo2.jpg" type="image/jpg" alt="Decorativo rei">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/decorativos/rei_prateado.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-none d-md-block">
-                                    <br />
-                                    <h5>Rei prateado</h5>
-                                    <p>Nada melhor que um rei para decorar sua casa</p>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Chaveiro/Chaveiro2.jpg" type="image/jpg" alt="Chaveiro rei">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/chaveiros/chaveiro_real.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-none d-md-block">
-                                    <br />
-                                    <h5>Chaveiro real</h5>
-                                    <p>Leve a realeza contigo para todo lugar</p>
-                                </div>
-                            </div>
-
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>  
-                            </button>
-
-                            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                            
-                        </div>
+                    <div id="tv">
+                        <p>LiChess TV</p>
+                        <iframe src="https://lichess.org/tv/frame?theme=brown&bg=dark" style="width: 400px; height: 444px;" allowtransparency="true" frameborder="0"></iframe>
+                    </div>
+                    <div id="puzzle">
+                        <p>Puzzle do dia</p>
+                        <iframe src="https://lichess.org/training/frame?theme=brown&bg=dark" style="width: 400px; height: 444px;" allowtransparency="true" frameborder="0"></iframe>
+                    </div>
+                    <div id="estudo">
+                        <p>Importe a sua análise para a ChessGate</p>
+                        <iframe width=600 height=371 src="https://lichess.org/study/embed/8P2YYmYr/ZvMEUArK#0" frameborder=0></iframe>
                     </div>
                 </div>
             </main>
 
             <footer>
-                <div id="rodape" class="home_rodape">
+                <div id="rodape">
                     <div id="conteudo_rodape">
                         <div id="p_col">
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
-                                <li><a href="home.html">Home</a></li>
-                                <li><a href="conta/perfil.html">Conta</a></li>
-                                <li><a href="produtos/tabuleiros.html">Tabuleiros</a></li>
+                                <li><a href="home.php">Home</a></li>
+                                <li><a href="conta/perfil.php">Conta</a></li>
+                                <li><a href="produtos/tabuleiros.php">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="produtos/livros.html">Livros</a></li>
-                                <li><a href="produtos/decorativos.html">Decorativos</a></li>
-                                <li><a href="produtos/chaveiros.html">Chaveiros</a></li>
-                                <li><a href="partidas.html">Partidas</a></li>
+                                <li><a href="produtos/livros.php">Livros</a></li>
+                                <li><a href="produtos/decorativos.php">Decorativos</a></li>
+                                <li><a href="produtos/chaveiros.php">Chaveiros</a></li>
+                                <li><a href="partidas.php">Partidas</a></li>
                             </ul>
                         </div>
                     </div>

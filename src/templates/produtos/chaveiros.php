@@ -3,10 +3,10 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>ChessGate - Entrar</title>
+        <title>ChessGate - Chaveiros</title>
         <link rel="shortcut icon" href="../../../assets/images/icons/logo_icone.svg" type="image/svg" />
-        <meta name="description" content="Entra na sua conta para comprar na maior e melhor loja de artigos enxadrístico do país" />
-        <meta name="keywords" content="login entrar xadrez loja store" />
+        <meta name="description" content="Leve a ChessGate para aonde for!" />
+        <meta name="keywords" content="xadrez loja chaveiros casa shop store" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../../styles/estilos.css" />
         <!-- JQuery -->
@@ -19,8 +19,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com"> 
         <!-- Lora -->
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
-        <!-- Scripts -->
-        <script lang="javascript" type="text/javascript" src="../../scripts/recuperarSenha.js"></script>
     </head>
 
     <body id="topo">
@@ -28,7 +26,7 @@
             <header>
                 <div id="cabecalho">
                     <div id="menu_superior_esquerda">
-                        <a href="../home.html">
+                        <a href="../home.php">
                             <img src="../../../assets/images/icons/logo_icone.svg" type="image/svg" alt="Logomarca" />
                             ChessGate
                         </a>
@@ -40,7 +38,7 @@
                             </form>
                             <img src="../../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
-                        <a href="entrar.html">
+                        <a href="../conta/entrar.php">
                             <img src="../../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
                             Entrar
                         </a>
@@ -49,32 +47,32 @@
                 <div id="menu_navegacao">
                     <ul class="nav justify-content-center">
                         <li id="link_home" class="nav-item">
-                            <a class="nav-link" href="../home.html">Home</a>
+                            <a class="nav-link" href="../home.php">Home</a>
                         </li>
                         <li id="link_partidas" class="nav-item">
-                            <a class="nav-link" href="../partidas.html">Partidas</a>
+                            <a class="nav-link" href="../partidas.php">Partidas</a>
                         </li>
                         <li id="link_produtos" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="../produtos/tabuleiros.html">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/livros.html">Livros</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/decorativos.html">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/chaveiros.html">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="tabuleiros.php">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="livros.php">Livros</a></li>
+                                    <li><a class="dropdown-item" href="decorativos.php">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="chaveiros.php">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li id="link_carrinho" class="nav-item">
-                            <a class="nav-link" href="../carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="../carrinho.php">Carrinho</a>
                         </li>
                         <li id="link_conta" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="entrar.html">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="perfil.html">Meus dados</a></li>
+                                    <li><a class="dropdown-item" href="../conta/entrar.php">Entrar</a></li>
+                                    <li><a class="dropdown-item" href="../conta/perfil.php">Meus dados</a></li>
                                     <li><a class="dropdown-item" href="#">Sair</a></li>
                                 </ul>
                             </div>
@@ -84,32 +82,37 @@
             </header>
 
             <main>
-                <div id="conteudo" class="cont">
-                    <div class="entrar">
-                        <p>Entre na ChessGate</p>
-                        <form>
-                            <div class="form-group">
-                               <label for="txtUsuario">Login</label>
-                               <input type="text" maxlength="30" class="form-control" id="txtUsuario" placeholder="Digite aqui a sua conta" required/>
+                <div id="conteudo" class="prod">
+                    <p style="text-align: center;">Chaveiros</p>
+                    <div id="pri_col">
+                        <div class="card">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 class="card-title">Coleção chaveiros</h5>
+                                <img src="../../../assets/images/products/Chaveiro/Chaveiro1.webp" type="image/webp" alt="Coleção chaveiros" />
+                                <p class="card-text">Tenha todas as peças</p>
+                                <a href="chaveiros/colecao_chaveiros.html" class="btn">Ver produto</a>
                             </div>
-                            <br />
-                            <div class="form-group">
-                                <label for="txtSenha">Senha</label>
-                                <input type="password" maxlength="30" class="form-control" id="txtSenha" placeholder="Digite aqui a sua senha" aria-labelledby="senhaAjuda" required/>
-                                <small id="senhaAjuda" class="form-text text-muted">
-                                    <p style="font-size: 15px;">Proteja a sua senha! Não compartilhe com ninguém!</p>
-                                </small>
-                            </div>
-                            <button id="btn_entrar" type="submit" class="btn btn-lg btn-block">Entrar</button>
-                        </form>
-                        <button id="btn_esqueci" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#esqueciSenha">
-                            Esqueceu a senha?
-                        </button>
+                        </div>
                     </div>
-                    <div class="cadastrar">
-                        <p>Cadastrar</p>
-                        <p>Não possui uma conta? Não perca tempo, cadastre-se agora mesmo!</p>
-                        <a id="btn_cadastrar" href="cadastrar.html" class="btn btn-lg bt-block" role="button" aria-pressed="false">Cadastrar</a>
+                    <div id="seg_col">
+                        <div class="card">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 class="card-title">Chaveiro real</h5>
+                                <img src="../../../assets/images/products/Chaveiro/Chaveiro2.jpg" type="image/jpg" alt="Chaveiro real" />
+                                <p class="card-text">Leve a realeza aonde for</p>
+                                <a href="chaveiros/chaveiro_real.html" class="btn">Ver produto</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ter_col">
+                        <div class="card">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 class="card-title">Realeza mini</h5>
+                                <img src="../../../assets/images/products/Chaveiro/Chaveiro3.jpg" type="image/jpg" alt="Realeza mini" />
+                                <p class="card-text">O rei vai sempre contigo</p>
+                                <a href="chaveiros/chaveiro_mini.html" class="btn">Ver produto</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -120,17 +123,17 @@
                         <div id="p_col">
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
-                                <li><a href="../home.html">Home</a></li>
-                                <li><a href="perfil.html">Conta</a></li>
-                                <li><a href="../produtos/tabuleiros.html">Tabuleiros</a></li>
+                                <li><a href="../home.php">Home</a></li>
+                                <li><a href="../conta/perfil.php">Conta</a></li>
+                                <li><a href="tabuleiros.php">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="../produtos/livros.html">Livros</a></li>
-                                <li><a href="../produtos/decorativos.html">Decorativos</a></li>
-                                <li><a href="../produtos/chaveiros.html">Chaveiros</a></li>
-                                <li><a href="../partidas.html">Partidas</a></li>
+                                <li><a href="livros.php">Livros</a></li>
+                                <li><a href="decorativos.php">Decorativos</a></li>
+                                <li><a href="chaveiros.php">Chaveiros</a></li>
+                                <li><a href="../partidas.php">Partidas</a></li>
                             </ul>
                         </div>
                     </div>
@@ -261,24 +264,3 @@
         alert(busca.value);
     }
 </script>
-
-<div class="modal fade" id="esqueciSenha" tabindex="-1" role="dialog" style="z-index: 1500;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Esqueci minha senha! E agora?</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" arial-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Caso você tenha esquecido a sua senha, informe o email da sua conta para que podemos recuperá-la</p>
-                <input type="email" id="emailRecuperar" class="form-control" maxlength="30" required placeholder="Informe o seu email" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" onclick="recuperar ();" class="btn btn-danger">Recuperar senha</button>
-            </div>
-        </div>
-    </div>
-</div>

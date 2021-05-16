@@ -29,7 +29,7 @@
             <header>
                 <div id="cabecalho">
                     <div id="menu_superior_esquerda">
-                        <a href="../home.html">
+                        <a href="../home.php">
                             <img src="../../../assets/images/icons/logo_icone.svg" type="image/svg" alt="Logomarca" />
                             ChessGate
                         </a>
@@ -41,7 +41,7 @@
                             </form>
                             <img src="../../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
-                        <a href="entrar.html">
+                        <a href="entrar.php">
                             <img src="../../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
                             Entrar
                         </a>
@@ -50,32 +50,32 @@
                 <div id="menu_navegacao">
                     <ul class="nav justify-content-center">
                         <li id="link_home" class="nav-item">
-                            <a class="nav-link" href="../home.html">Home</a>
+                            <a class="nav-link" href="../home.php">Home</a>
                         </li>
                         <li id="link_partidas" class="nav-item">
-                            <a class="nav-link" href="../partidas.html">Partidas</a>
+                            <a class="nav-link" href="../partidas.php">Partidas</a>
                         </li>
                         <li id="link_produtos" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="../produtos/tabuleiros.html">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/livros.html">Livros</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/decorativos.html">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/chaveiros.html">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/tabuleiros.php">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/livros.php">Livros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/decorativos.php">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/chaveiros.php">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li id="link_carrinho" class="nav-item">
-                            <a class="nav-link" href="../carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="../carrinho.php">Carrinho</a>
                         </li>
                         <li id="link_conta" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="entrar.html">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="perfil.html">Meus dados</a></li>
+                                    <li><a class="dropdown-item" href="entrar.php">Entrar</a></li>
+                                    <li><a class="dropdown-item" href="perfil.php">Meus dados</a></li>
                                     <li><a class="dropdown-item" href="#">Sair</a></li>
                                 </ul>
                             </div>
@@ -159,17 +159,17 @@
                         <div id="p_col">
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
-                                <li><a href="../home.html">Home</a></li>
-                                <li><a href="perfil.html">Conta</a></li>
-                                <li><a href="../produtos/tabuleiros.html">Tabuleiros</a></li>
+                                <li><a href="../home.php">Home</a></li>
+                                <li><a href="perfil.php">Conta</a></li>
+                                <li><a href="../produtos/tabuleiros.php">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="../produtos/livros.html">Livros</a></li>
-                                <li><a href="../produtos/decorativos.html">Decorativos</a></li>
-                                <li><a href="../produtos/chaveiros.html">Chaveiros</a></li>
-                                <li><a href="../partidas.html">Partidas</a></li>
+                                <li><a href="../produtos/livros.php">Livros</a></li>
+                                <li><a href="../produtos/decorativos.php">Decorativos</a></li>
+                                <li><a href="../produtos/chaveiros.php">Chaveiros</a></li>
+                                <li><a href="../partidas.php">Partidas</a></li>
                             </ul>
                         </div>
                     </div>
