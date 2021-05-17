@@ -301,20 +301,6 @@ body {
     margin-bottom: 5%;
 }
 
-.container-fluid #conteudo.prod #qua_col {
-    width: 100%;
-    display: inline-table;
-    float: left;
-    margin-bottom: 5%;
-}
-
-.container-fluid #conteudo.prod #qui_col {
-    width: 100%;
-    display: inline-table;
-    float: left;
-    margin-bottom: 5%;
-}
-
 .container-fluid #conteudo.prod .card .card-text {
     font-size: 22px;
 }
@@ -594,21 +580,6 @@ body {
         margin-bottom: 2.5%;
     }
     
-    .container-fluid #conteudo.prod #qua_col {
-        width: 47.5%;
-        display: inline-table;
-        float: left;
-        margin-left: 2.5%;
-        margin-bottom: 2.5%;
-    }
-
-    .container-fluid #conteudo.prod #qui_col {
-        width: 47.5%;
-        display: inline-table;
-        float: left;
-        margin-right: 2.5%;
-        margin-bottom: 2.5%;
-    }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -700,21 +671,6 @@ body {
         margin-bottom: 2%;
     }
     
-    .container-fluid #conteudo.prod #qua_col {
-        width: 47.5%;
-        display: inline-table;
-        float: left;
-        margin-left: 2.5%;
-        margin-bottom: 2%;
-    }
-
-    .container-fluid #conteudo.prod #qui_col {
-        width: 47.5%;
-        display: inline-table;
-        float: left;
-        margin-right: 2.5%;
-        margin-bottom: 2.5%;
-    }
 }
 
 @media only screen and (min-width: 1200px) {
