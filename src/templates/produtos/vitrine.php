@@ -1,12 +1,68 @@
+<?php
+
+    session_start ();
+    if (isset ($_SESSION["logado"])) {
+        $nome = $_SESSION["nome"];
+        $email = $_SESSION["email"];
+        $fone = $_SESSION["fone"];
+        $endereco = $_SESSION["endereco"];
+        $logado = $_SESSION["logado"];
+    }
+    
+    include ("../conta/dadosBanco.php");
+
+    $cod_categoria = $_GET["categoria"];
+
+    if ($_GET["categoria"]==100) {
+        $categoria = "Tabuleiros";
+        $categoriaQuery = "tabuleiro";
+    }
+    else if ($_GET["categoria"]==200) {
+        $categoria = "Livros";
+        $categoriaQuery = "livro";
+    }
+    else if ($_GET["categoria"]==300) {
+        $categoria = "Decorativos";
+        $categoriaQuery = "decorativo";
+    }
+    else if ($_GET["categoria"]==400) {
+        $categoria = "Chaveiros";
+        $categoriaQuery = "chaveiro";
+    }
+    else
+        header ("location: ../home.php");
+
+    $conexao = mysqli_connect ($servidor, $usuario, $senhaBanco, $banco);
+
+    if (!$conexao)
+        die ("Conexão falhou: " . mysqli_connection_error ());
+    else {
+        $query = "SELECT p.cod_produto, p.titulo, p.imagemURL
+        FROM produto p INNER JOIN $categoriaQuery t ON p.cod_produto = t.cod_produto
+        WHERE p.cod_categoria=$cod_categoria;";
+
+        $resultado = mysqli_query ($conexao, $query);
+
+        if (mysqli_num_rows($resultado) <= 0)
+            echo "<script>alert ('Nenhum produto cadastrado nessa categoria!'); </script>";
+    }
+
+    function proximo (int $i) {
+        return fmod ($i,3) + 1; 
+    }
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
     <head>
         <meta charset="utf-8" />
-        <title>ChessGate - Decorativos</title>
+        <title>ChessGate - <?php echo $categoria;?></title>
         <link rel="shortcut icon" href="../../../assets/images/icons/logo_icone.svg" type="image/svg" />
-        <meta name="description" content="Decore a sua casa na ChessGate!" />
-        <meta name="keywords" content="xadrez loja decorativos casa shop store" />
+        <meta name="description" content="Compre seu próximo tabuleiro de xadrez na ChessGate! Entre vários outros produtos!" />
+        <meta name="keywords" content="xadrez loja tabuleiro peças shop store decorativo chaveiros livros" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../../styles/estilos.css" />
         <!-- JQuery -->
@@ -26,7 +82,7 @@
             <header>
                 <div id="cabecalho">
                     <div id="menu_superior_esquerda">
-                        <a href="../home.html">
+                        <a href="../home.php">
                             <img src="../../../assets/images/icons/logo_icone.svg" type="image/svg" alt="Logomarca" />
                             ChessGate
                         </a>
@@ -38,42 +94,53 @@
                             </form>
                             <img src="../../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
-                        <a href="../conta/entrar.html">
+                        <a href="../conta/entrar.php">
                             <img src="../../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
-                            Entrar
+                            <?php 
+                                if ($logado) {
+                                    echo $nome;
+                                }
+                                else
+                                    echo "Entrar";
+                            ?>
                         </a>
                     </div>
                 </div>
                 <div id="menu_navegacao">
                     <ul class="nav justify-content-center">
                         <li id="link_home" class="nav-item">
-                            <a class="nav-link" href="../home.html">Home</a>
+                            <a class="nav-link" href="../home.php">Home</a>
                         </li>
                         <li id="link_partidas" class="nav-item">
-                            <a class="nav-link" href="../partidas.html">Partidas</a>
+                            <a class="nav-link" href="../partidas.php">Partidas</a>
                         </li>
                         <li id="link_produtos" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="tabuleiros.html">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="livros.html">Livros</a></li>
-                                    <li><a class="dropdown-item" href="decorativos.html">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="chaveiros.html">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="vitrine.php?categoria=100">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="vitrine.php?categoria=200">Livros</a></li>
+                                    <li><a class="dropdown-item" href="vitrine.php?categoria=300">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="vitrine.php?categoria=400">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li id="link_carrinho" class="nav-item">
-                            <a class="nav-link" href="../carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="../carrinho.php">Carrinho</a>
                         </li>
                         <li id="link_conta" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="../conta/entrar.html">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="../conta/perfil.html">Meus dados</a></li>
-                                    <li><a class="dropdown-item" href="#">Sair</a></li>
+                                    <?php 
+                                        if ($logado) {
+                                            echo "<li><a class='dropdown-item' href='../conta/perfil.php'>Meus dados</a></li>";
+                                            echo "<li><a class='dropdown-item' href='../conta/sair.php'>Sair</a></li>";
+                                        }
+                                        else
+                                            echo "<li><a class='dropdown-item' href='../conta/entrar.php'>Entrar</a></li>";
+                                    ?>
                                 </ul>
                             </div>
                         </li>
@@ -82,58 +149,36 @@
             </header>
 
             <main>
-                <div id="conteudo" class="prod">
-                    <p style="text-align: center;">Decorativos</p>
-                    <div id="pri_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Rei prateado</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo2.jpg" type="image/jpg" alt="Rei prateado" />
-                                <p class="card-text">Decore sua casa com um rei</p>
-                                <a href="decorativos/rei_prateado.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="seg_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Vitória enxadrística 1</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo4.jpg" type="image/jpg" alt="Brancas ganhas" />
-                                <p class="card-text">Xadrez até na vertical</p>
-                                <a href="decorativos/vitoria1.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="ter_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Vitória enxadrística 2</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo5.jpg" type="image/jpg" alt="Pretas ganhas" />
-                                <p class="card-text">Táticas na parede</p>
-                                <a href="decorativos/vitoria2.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="qua_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Peças grandes enfeite</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo1.jpg" type="image/jpg" alt="Peças Pretas detalhistas" />
-                                <p class="card-text">Enfeite na sua sala</p>
-                                <a href="decorativos/grandes_enfeite.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="qui_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Peças pequenas enfeite</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo3.webp" type="image/webp" alt="Peças Pretas" />
-                                <p class="card-text">O exército dos enfeites</p>
-                                <a href="decorativos/pequenas_enfeite.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
+                <div id="conteudo" class="prod <?php if ($categoria=="Livros") echo "liv"; ?>">
+                    <p style="text-align: center;"><?php echo $categoria; ?></p>
+                    
+                    <?php
+                        $i = 0;
+                        while ($linha = mysqli_fetch_assoc ($resultado)) {
+                            $titulo = $linha["titulo"];
+                            $imagemPath = $linha["imagemURL"];
+                            $cod_produto = $linha["cod_produto"];
+                            
+                            if (proximo($i)==1)
+                                $classe = "pri_col";
+                            else if (proximo($i)==2)
+                                $classe = "seg_col";
+                            else if (proximo($i)==3)
+                                $classe = "ter_col";
+
+                            $i++;
+
+                            echo  "<div id='$classe'>
+                                <div class='card'>
+                                    <div class='card-body' style='text-align: center;'>
+                                        <h5 class='card-title'>$titulo</h5>
+                                        <img src='$imagemPath' alt='$titulo' />
+                                        <a href='produto?cod_produto=$cod_produto' class='btn'>Ver produto</a>
+                                    </div>
+                                </div>
+                            </div>";
+                        }
+                    ?>
                 </div>
             </main>
 
@@ -143,17 +188,22 @@
                         <div id="p_col">
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
-                                <li><a href="../home.html">Home</a></li>
-                                <li><a href="../conta/perfil.html">Conta</a></li>
-                                <li><a href="tabuleiros.html">Tabuleiros</a></li>
+                                <li><a href="../home.php">Home</a></li>
+                                <?php 
+                                    if ($logado)
+                                        echo "<li><a href='../conta/perfil.php'>Conta</a></li>";
+                                    else
+                                        echo "<li><a href='../conta/entrar.php'>Entrar</a></li>";
+                                ?>
+                                <li><a href="vitrine.php?categoria=100">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="livros.html">Livros</a></li>
-                                <li><a href="decorativos.html">Decorativos</a></li>
-                                <li><a href="chaveiros.html">Chaveiros</a></li>
-                                <li><a href="../partidas.html">Partidas</a></li>
+                                <li><a href="vitrine.php?categoria=200">Livros</a></li>
+                                <li><a href="vitrine.php?categoria=300">Decorativos</a></li>
+                                <li><a href="vitrine.php?categoria=400">Chaveiros</a></li>
+                                <li><a href="../partidas.php">Partidas</a></li>
                             </ul>
                         </div>
                     </div>
