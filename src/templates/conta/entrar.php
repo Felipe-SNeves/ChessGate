@@ -1,3 +1,23 @@
+<?php 
+    
+    session_start ();
+    if (isset ($_SESSION["logado"])) {
+        $nome = $_SESSION["nome"];
+        $email = $_SESSION["email"];
+        $fone = $_SESSION["fone"];
+        $endereco = $_SESSION["endereco"];
+        $logado = $_SESSION["logado"];
+        header ("location: ../home.php");
+    }
+    else {
+        if ($_GET["cod"] == 401)
+            echo "<script>alert ('As credenciais informadas não são válidas!');</script>";
+
+        if ($_GET["cod"]==200)
+            echo "<script> alert ('Conta criada com sucesso!')</script>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -42,7 +62,13 @@
                         </span>
                         <a href="entrar.php">
                             <img src="../../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
-                            Entrar
+                            <?php 
+                                if ($logado) {
+                                    echo $_SESSION["nome"];
+                                }
+                                else
+                                    echo "Entrar";
+                            ?>
                         </a>
                     </div>
                 </div>
@@ -59,10 +85,10 @@
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="../produtos/tabuleiros.php">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/livros.php">Livros</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/decorativos.php">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="../produtos/chaveiros.php">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=100">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=200">Livros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=300">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=400">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -73,9 +99,14 @@
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="entrar.php">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="perfil.php">Meus dados</a></li>
-                                    <li><a class="dropdown-item" href="#">Sair</a></li>
+                                <?php 
+                                        if ($logado) {
+                                            echo "<li><a class='dropdown-item' href='perfil.php'>Meus dados</a></li>";
+                                            echo "<li><a class='dropdown-item' href='sair.php'>Sair</a></li>";
+                                        }
+                                        else
+                                            echo "<li><a class='dropdown-item' href='entrar.php'>Entrar</a></li>";
+                                    ?>
                                 </ul>
                             </div>
                         </li>
@@ -87,15 +118,15 @@
                 <div id="conteudo" class="cont">
                     <div class="entrar">
                         <p>Entre na ChessGate</p>
-                        <form>
+                        <form method="post" action="logar.php">
                             <div class="form-group">
-                               <label for="txtUsuario">Login</label>
-                               <input type="text" maxlength="30" class="form-control" id="txtUsuario" placeholder="Digite aqui a sua conta" required/>
+                               <label for="txtUsuario">Email</label>
+                               <input name="email" type="email" maxlength="30" class="form-control" id="txtUsuario" placeholder="Digite aqui o seu email" required/>
                             </div>
                             <br />
                             <div class="form-group">
                                 <label for="txtSenha">Senha</label>
-                                <input type="password" maxlength="30" class="form-control" id="txtSenha" placeholder="Digite aqui a sua senha" aria-labelledby="senhaAjuda" required/>
+                                <input name="senha" type="password" maxlength="30" class="form-control" id="txtSenha" placeholder="Digite aqui a sua senha" aria-labelledby="senhaAjuda" required/>
                                 <small id="senhaAjuda" class="form-text text-muted">
                                     <p style="font-size: 15px;">Proteja a sua senha! Não compartilhe com ninguém!</p>
                                 </small>
@@ -121,15 +152,20 @@
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
                                 <li><a href="../home.php">Home</a></li>
-                                <li><a href="perfil.php">Conta</a></li>
-                                <li><a href="../produtos/tabuleiros.php">Tabuleiros</a></li>
+                                <?php 
+                                    if ($logado)
+                                        echo "<li><a href='conta/perfil.php'>Conta</a></li>";
+                                    else
+                                        echo "<li><a href='conta/entrar.php'>Entrar</a></li>";
+                                ?>
+                                <li><a href="../produtos/vitrine.php?categoria=100">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="../produtos/livros.php">Livros</a></li>
-                                <li><a href="../produtos/decorativos.php">Decorativos</a></li>
-                                <li><a href="../produtos/chaveiros.php">Chaveiros</a></li>
+                                <li><a href="../produtos/vitrine.php?categoria=200">Livros</a></li>
+                                <li><a href="../produtos/vitrine.php?categoria=300">Decorativos</a></li>
+                                <li><a href="../produtos/vitrine.php?categoria=400">Chaveiros</a></li>
                                 <li><a href="../partidas.php">Partidas</a></li>
                             </ul>
                         </div>
