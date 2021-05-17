@@ -1,3 +1,36 @@
+<?php 
+
+    include ("./conta/dadosBanco.php");
+
+    $cod_produtoCarrousel_1 = 114;
+    $cod_produtoCarrousel_2 = 111;
+    $cod_produtoCarrousel_3 = 310;
+    $cod_produtoCarrousel_4 = 411;
+    
+    session_start ();
+    if (isset ($_SESSION["logado"])) {
+        $nome = $_SESSION["nome"];
+        $email = $_SESSION["email"];
+        $fone = $_SESSION["fone"];
+        $endereco = $_SESSION["endereco"];
+        $logado = $_SESSION["logado"];
+    }
+
+    $conexao = mysqli_connect ($servidor, $usuario, $senhaBanco, $banco);
+
+    if (!$conexao)
+        die ("Conexão falhou: " . mysqli_connection_error ());
+    else {
+        $query = "SELECT p.titulo, p.imagemURL
+        FROM produto p WHERE p.cod_produto=$cod_produtoCarrousel_1;";
+
+        $resultado = mysqli_query ($conexao, $query);
+
+        if (mysqli_num_rows($resultado) <= 0)
+            echo "<script>alert ('Nenhum produto cadastrado nessa categoria!'); </script>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -26,7 +59,7 @@
             <header>
                 <div id="cabecalho">
                     <div id="menu_superior_esquerda">
-                        <a href="home.html">
+                        <a href="home.php">
                             <img src="../../assets/images/icons/logo_icone.svg" type="image/svg" alt="Logomarca" />
                             ChessGate
                         </a>
@@ -38,42 +71,53 @@
                             </form>
                             <img src="../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
-                        <a href="conta/entrar.html">
+                        <a href="conta/entrar.php">
                             <img src="../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
-                            Entrar
+                            <?php 
+                                if ($logado) {
+                                    echo $nome;
+                                }
+                                else
+                                    echo "Entrar";
+                            ?>
                         </a>
                     </div>
                 </div>
                 <div id="menu_navegacao">
                     <ul class="nav justify-content-center">
                         <li id="link_home" class="nav-item">
-                            <a class="nav-link" href="home.html">Home</a>
+                            <a class="nav-link" href="home.php">Home</a>
                         </li>
                         <li id="link_partidas" class="nav-item">
-                            <a class="nav-link" href="partidas.html">Partidas</a>
+                            <a class="nav-link" href="partidas.php">Partidas</a>
                         </li>
                         <li id="link_produtos" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="produtos/tabuleiros.html">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="produtos/livros.html">Livros</a></li>
-                                    <li><a class="dropdown-item" href="produtos/decorativos.html">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="produtos/chaveiros.html">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/vitrine.php?categoria=100">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/vitrine.php?categoria=200">Livros</a></li>
+                                    <li><a class="dropdown-item" href="produtos/vitrine.php?categoria=300">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="produtos/vitrine.php?categoria=400">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li id="link_carrinho" class="nav-item">
-                            <a class="nav-link" href="carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="carrinho.php">Carrinho</a>
                         </li>
                         <li id="link_conta" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="conta/entrar.html">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="conta/perfil.html">Meus dados</a></li>
-                                    <li><a class="dropdown-item" href="#">Sair</a></li>
+                                    <?php 
+                                        if ($logado) {
+                                            echo "<li><a class='dropdown-item' href='conta/perfil.php'>Meus dados</a></li>";
+                                            echo "<li><a class='dropdown-item' href='conta/sair.php'>Sair</a></li>";
+                                        }
+                                        else
+                                            echo "<li><a class='dropdown-item' href='conta/entrar.php'>Entrar</a></li>";
+                                    ?>
                                 </ul>
                             </div>
                         </li>
@@ -90,64 +134,109 @@
 
                             <div class="carousel-item active">
                                 <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Tabuleiros/tabuleiro_oriental.jpg" type="image/jpg" alt="Tabuleiro Oriental">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/tabuleiros/tabuleiro_oriental.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
+                                        <?php 
+                                            $linha = mysqli_fetch_assoc ($resultado);
+                                            $titulo = $linha["titulo"];
+                                            $imagemPath = substr($linha["imagemURL"], 3);
+
+                                            echo "
+                                            <img src='$imagemPath' />
+                                            <div class='back_image'>
+                                                <div class='conteudo_image'>
+                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_1'>Clique aqui para ver mais</a>
+                                                </div>
+                                            </div>";
+                    
+                                        ?>
+                        
                                 </div>
                                 <div class="d-none d-md-block">
                                     <br />
-                                    <h5>Tabuleiro Oriental</h5>
+                                    <?php echo "<h5>$titulo</h5>"; ?>
                                     <p>Trace as suas estratégias nas estepes asiáticas</p>
                                 </div>
                             </div>
 
                             <div class="carousel-item">
                                 <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Tabuleiros/tabuleiro_madeira.jpg" type="image/jpg" alt="Tabueleiro de madeira">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/tabuleiros/tabuleiro_classico.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
+                                <?php 
+                                $query = "SELECT p.titulo, p.imagemURL
+                                FROM produto p WHERE p.cod_produto=$cod_produtoCarrousel_2;";
+                        
+                                $resultado = mysqli_query ($conexao, $query);
+                                $linha = mysqli_fetch_assoc ($resultado);
+                                            $titulo = $linha["titulo"];
+                                            $imagemPath = substr($linha["imagemURL"], 3);
+
+                                            echo "
+                                            <img src='$imagemPath' />
+                                            <div class='back_image'>
+                                                <div class='conteudo_image'>
+                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_2'>Clique aqui para ver mais</a>
+                                                </div>
+                                            </div>";
+                    
+                                ?>
                                 </div>
                                 <div class="d-none d-md-block">
                                     <br />
-                                    <h5>Tabuleiro Clássico</h5>
+                                    <?php echo "<h5>$titulo</h5>"; ?>
                                     <p>Nada melhor que o clássico</p>
                                 </div>
                             </div>
 
                             <div class="carousel-item">
                                 <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Decorativos/Decorativo2.jpg" type="image/jpg" alt="Decorativo rei">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/decorativos/rei_prateado.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
+                                <?php 
+                                $query = "SELECT p.titulo, p.imagemURL
+                                FROM produto p WHERE p.cod_produto=$cod_produtoCarrousel_3;";
+                        
+                                $resultado = mysqli_query ($conexao, $query);
+                                $linha = mysqli_fetch_assoc ($resultado);
+                                            $titulo = $linha["titulo"];
+                                            $imagemPath = substr($linha["imagemURL"], 3);
+
+                                            echo "
+                                            <img src='$imagemPath' />
+                                            <div class='back_image'>
+                                                <div class='conteudo_image'>
+                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_3'>Clique aqui para ver mais</a>
+                                                </div>
+                                            </div>";
+                    
+                                ?>
                                 </div>
                                 <div class="d-none d-md-block">
                                     <br />
-                                    <h5>Rei prateado</h5>
+                                    <?php echo "<h5>$titulo</h5>"; ?>
                                     <p>Nada melhor que um rei para decorar sua casa</p>
                                 </div>
                             </div>
 
                             <div class="carousel-item">
                                 <div id="op_box" style="position: relative;">
-                                    <img src="../../assets/images/products/Chaveiro/Chaveiro2.jpg" type="image/jpg" alt="Chaveiro rei">
-                                    <div class="back_image">
-                                        <div class="conteudo_image">
-                                            <a target="new" href="produtos/chaveiros/chaveiro_real.html">Clique aqui para ver mais</a>
-                                        </div>
-                                    </div>
+                                <?php 
+                                $query = "SELECT p.titulo, p.imagemURL
+                                FROM produto p WHERE p.cod_produto=$cod_produtoCarrousel_4;";
+                        
+                                $resultado = mysqli_query ($conexao, $query);
+                                $linha = mysqli_fetch_assoc ($resultado);
+                                            $titulo = $linha["titulo"];
+                                            $imagemPath = substr($linha["imagemURL"], 3);
+
+                                            echo "
+                                            <img src='$imagemPath' />
+                                            <div class='back_image'>
+                                                <div class='conteudo_image'>
+                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_4'>Clique aqui para ver mais</a>
+                                                </div>
+                                            </div>";
+                    
+                                ?>
                                 </div>
                                 <div class="d-none d-md-block">
                                     <br />
-                                    <h5>Chaveiro real</h5>
+                                    <?php echo "<h5>$titulo</h5>"; ?>
                                     <p>Leve a realeza contigo para todo lugar</p>
                                 </div>
                             </div>
@@ -173,17 +262,22 @@
                         <div id="p_col">
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
-                                <li><a href="home.html">Home</a></li>
-                                <li><a href="conta/perfil.html">Conta</a></li>
-                                <li><a href="produtos/tabuleiros.html">Tabuleiros</a></li>
+                                <li><a href="home.php">Home</a></li>
+                                <?php 
+                                    if ($logado)
+                                        echo "<li><a href='conta/perfil.php'>Conta</a></li>";
+                                    else
+                                        echo "<li><a href='conta/entrar.php'>Entrar</a></li>";
+                                ?>
+                                <li><a href="produtos/vitrine.php?categoria=100">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="produtos/livros.html">Livros</a></li>
-                                <li><a href="produtos/decorativos.html">Decorativos</a></li>
-                                <li><a href="produtos/chaveiros.html">Chaveiros</a></li>
-                                <li><a href="partidas.html">Partidas</a></li>
+                                <li><a href="produtos/vitrine.php?categoria=200">Livros</a></li>
+                                <li><a href="produtos/vitrine.php?categoria=300">Decorativos</a></li>
+                                <li><a href="produtos/vitrine.php?categoria=400">Chaveiros</a></li>
+                                <li><a href="partidas.php">Partidas</a></li>
                             </ul>
                         </div>
                     </div>
