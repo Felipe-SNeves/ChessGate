@@ -1,12 +1,32 @@
+<?php 
+    
+    session_start ();
+    if (isset ($_SESSION["logado"])) {
+        $nome = $_SESSION["nome"];
+        $email = $_SESSION["email"];
+        $fone = $_SESSION["fone"];
+        $endereco = $_SESSION["endereco"];
+        $logado = $_SESSION["logado"];
+        header ("location: ../home.php");
+    }
+    else {
+        if ($_GET["cod"] == 401)
+            echo "<script>alert ('As credenciais informadas não são válidas!');</script>";
+
+        if ($_GET["cod"]==200)
+            echo "<script> alert ('Conta criada com sucesso!')</script>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
     <head>
         <meta charset="utf-8" />
-        <title>ChessGate - Decorativos</title>
+        <title>ChessGate - Entrar</title>
         <link rel="shortcut icon" href="../../../assets/images/icons/logo_icone.svg" type="image/svg" />
-        <meta name="description" content="Decore a sua casa na ChessGate!" />
-        <meta name="keywords" content="xadrez loja decorativos casa shop store" />
+        <meta name="description" content="Entra na sua conta para comprar na maior e melhor loja de artigos enxadrístico do país" />
+        <meta name="keywords" content="login entrar xadrez loja store" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../../styles/estilos.css" />
         <!-- JQuery -->
@@ -19,6 +39,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com"> 
         <!-- Lora -->
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+        <!-- Scripts -->
+        <script lang="javascript" type="text/javascript" src="../../scripts/recuperarSenha.js"></script>
     </head>
 
     <body id="topo">
@@ -26,7 +48,7 @@
             <header>
                 <div id="cabecalho">
                     <div id="menu_superior_esquerda">
-                        <a href="../home.html">
+                        <a href="../home.php">
                             <img src="../../../assets/images/icons/logo_icone.svg" type="image/svg" alt="Logomarca" />
                             ChessGate
                         </a>
@@ -38,42 +60,53 @@
                             </form>
                             <img src="../../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
-                        <a href="../conta/entrar.html">
+                        <a href="entrar.php">
                             <img src="../../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
-                            Entrar
+                            <?php 
+                                if ($logado) {
+                                    echo $_SESSION["nome"];
+                                }
+                                else
+                                    echo "Entrar";
+                            ?>
                         </a>
                     </div>
                 </div>
                 <div id="menu_navegacao">
                     <ul class="nav justify-content-center">
                         <li id="link_home" class="nav-item">
-                            <a class="nav-link" href="../home.html">Home</a>
+                            <a class="nav-link" href="../home.php">Home</a>
                         </li>
                         <li id="link_partidas" class="nav-item">
-                            <a class="nav-link" href="../partidas.html">Partidas</a>
+                            <a class="nav-link" href="../partidas.php">Partidas</a>
                         </li>
                         <li id="link_produtos" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownProdutos" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
 
                                 <ul id="lista_produtos" class="dropdown-menu" aria-labelledby="dropdownProdutos">
-                                    <li><a class="dropdown-item" href="tabuleiros.html">Tabuleiros</a></li>
-                                    <li><a class="dropdown-item" href="livros.html">Livros</a></li>
-                                    <li><a class="dropdown-item" href="decorativos.html">Decorativos</a></li>
-                                    <li><a class="dropdown-item" href="chaveiros.html">Chaveiros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=100">Tabuleiros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=200">Livros</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=300">Decorativos</a></li>
+                                    <li><a class="dropdown-item" href="../produtos/vitrine.php?categoria=400">Chaveiros</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li id="link_carrinho" class="nav-item">
-                            <a class="nav-link" href="../carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="../carrinho.php">Carrinho</a>
                         </li>
                         <li id="link_conta" class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link btn dropdown-toggle" href="#" role="button" id="dropdownConta" data-bs-toggle="dropdown" aria-expanded="false">Conta</a>
                                 <ul id="lista_usuario" class="dropdown-menu" aria-labelledby="dropdownConta">
-                                    <li><a class="dropdown-item" href="../conta/entrar.html">Entrar</a></li>
-                                    <li><a class="dropdown-item" href="../conta/perfil.html">Meus dados</a></li>
-                                    <li><a class="dropdown-item" href="#">Sair</a></li>
+                                <?php 
+                                        if ($logado) {
+                                            echo "<li><a class='dropdown-item' href='perfil.php'>Meus dados</a></li>";
+                                            echo "<li><a class='dropdown-item' href='sair.php'>Sair</a></li>";
+                                        }
+                                        else
+                                            echo "<li><a class='dropdown-item' href='entrar.php'>Entrar</a></li>";
+                                    ?>
                                 </ul>
                             </div>
                         </li>
@@ -82,57 +115,32 @@
             </header>
 
             <main>
-                <div id="conteudo" class="prod">
-                    <p style="text-align: center;">Decorativos</p>
-                    <div id="pri_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Rei prateado</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo2.jpg" type="image/jpg" alt="Rei prateado" />
-                                <p class="card-text">Decore sua casa com um rei</p>
-                                <a href="decorativos/rei_prateado.html" class="btn">Ver produto</a>
+                <div id="conteudo" class="cont">
+                    <div class="entrar">
+                        <p>Entre na ChessGate</p>
+                        <form method="post" action="logar.php">
+                            <div class="form-group">
+                               <label for="txtUsuario">Email</label>
+                               <input name="email" type="email" maxlength="30" class="form-control" id="txtUsuario" placeholder="Digite aqui o seu email" required/>
                             </div>
-                        </div>
+                            <br />
+                            <div class="form-group">
+                                <label for="txtSenha">Senha</label>
+                                <input name="senha" type="password" maxlength="30" class="form-control" id="txtSenha" placeholder="Digite aqui a sua senha" aria-labelledby="senhaAjuda" required/>
+                                <small id="senhaAjuda" class="form-text text-muted">
+                                    <p style="font-size: 15px;">Proteja a sua senha! Não compartilhe com ninguém!</p>
+                                </small>
+                            </div>
+                            <button name="btnLogar" id="btn_entrar" type="submit" class="btn btn-lg btn-block">Entrar</button>
+                        </form>
+                        <button id="btn_esqueci" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#esqueciSenha">
+                            Esqueceu a senha?
+                        </button>
                     </div>
-                    <div id="seg_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Vitória enxadrística 1</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo4.jpg" type="image/jpg" alt="Brancas ganhas" />
-                                <p class="card-text">Xadrez até na vertical</p>
-                                <a href="decorativos/vitoria1.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="ter_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Vitória enxadrística 2</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo5.jpg" type="image/jpg" alt="Pretas ganhas" />
-                                <p class="card-text">Táticas na parede</p>
-                                <a href="decorativos/vitoria2.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="qua_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Peças grandes enfeite</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo1.jpg" type="image/jpg" alt="Peças Pretas detalhistas" />
-                                <p class="card-text">Enfeite na sua sala</p>
-                                <a href="decorativos/grandes_enfeite.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="qui_col">
-                        <div class="card">
-                            <div class="card-body" style="text-align: center;">
-                                <h5 class="card-title">Peças pequenas enfeite</h5>
-                                <img src="../../../assets/images/products/Decorativos/Decorativo3.webp" type="image/webp" alt="Peças Pretas" />
-                                <p class="card-text">O exército dos enfeites</p>
-                                <a href="decorativos/pequenas_enfeite.html" class="btn">Ver produto</a>
-                            </div>
-                        </div>
+                    <div class="cadastrar">
+                        <p>Cadastrar</p>
+                        <p>Não possui uma conta? Não perca tempo, cadastre-se agora mesmo!</p>
+                        <a id="btn_cadastrar" href="cadastrar.php" class="btn btn-lg bt-block" role="button" aria-pressed="false">Cadastrar</a>
                     </div>
                 </div>
             </main>
@@ -143,17 +151,22 @@
                         <div id="p_col">
                             <ul>
                                 <li><a href="#topo">Topo</a></li>
-                                <li><a href="../home.html">Home</a></li>
-                                <li><a href="../conta/perfil.html">Conta</a></li>
-                                <li><a href="tabuleiros.html">Tabuleiros</a></li>
+                                <li><a href="../home.php">Home</a></li>
+                                <?php 
+                                    if ($logado)
+                                        echo "<li><a href='conta/perfil.php'>Conta</a></li>";
+                                    else
+                                        echo "<li><a href='conta/entrar.php'>Entrar</a></li>";
+                                ?>
+                                <li><a href="../produtos/vitrine.php?categoria=100">Tabuleiros</a></li>
                             </ul>
                         </div>
                         <div id="s_col">
                             <ul>
-                                <li><a href="livros.html">Livros</a></li>
-                                <li><a href="decorativos.html">Decorativos</a></li>
-                                <li><a href="chaveiros.html">Chaveiros</a></li>
-                                <li><a href="../partidas.html">Partidas</a></li>
+                                <li><a href="../produtos/vitrine.php?categoria=200">Livros</a></li>
+                                <li><a href="../produtos/vitrine.php?categoria=300">Decorativos</a></li>
+                                <li><a href="../produtos/vitrine.php?categoria=400">Chaveiros</a></li>
+                                <li><a href="../partidas.php">Partidas</a></li>
                             </ul>
                         </div>
                     </div>
@@ -284,3 +297,24 @@
         alert(busca.value);
     }
 </script>
+
+<div class="modal fade" id="esqueciSenha" tabindex="-1" role="dialog" style="z-index: 1500;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Esqueci minha senha! E agora?</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" arial-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Caso você tenha esquecido a sua senha, informe o email da sua conta para que podemos recuperá-la</p>
+                <input type="email" id="emailRecuperar" class="form-control" maxlength="30" required placeholder="Informe o seu email" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" onclick="recuperar ();" class="btn btn-danger">Recuperar senha</button>
+            </div>
+        </div>
+    </div>
+</div>
