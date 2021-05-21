@@ -29,6 +29,10 @@
         if (mysqli_num_rows($resultado) <= 0)
             echo "<script>alert ('Nenhum produto cadastrado nessa categoria!'); </script>";
     }
+
+    if ($_GET["cod"]==404) {
+        echo "<script>alert ('Produto inexistente!');</script>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -143,7 +147,7 @@
                                             <img src='$imagemPath' />
                                             <div class='back_image'>
                                                 <div class='conteudo_image'>
-                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_1'>Clique aqui para ver mais</a>
+                                                    <a target='new' href='produtos/produto.php?cod_produto=$cod_produtoCarrousel_1'>Clique aqui para ver mais</a>
                                                 </div>
                                             </div>";
                     
@@ -172,7 +176,7 @@
                                             <img src='$imagemPath' />
                                             <div class='back_image'>
                                                 <div class='conteudo_image'>
-                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_2'>Clique aqui para ver mais</a>
+                                                    <a target='new' href='produtos/produto.php?cod_produto=$cod_produtoCarrousel_2'>Clique aqui para ver mais</a>
                                                 </div>
                                             </div>";
                     
@@ -200,7 +204,7 @@
                                             <img src='$imagemPath' />
                                             <div class='back_image'>
                                                 <div class='conteudo_image'>
-                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_3'>Clique aqui para ver mais</a>
+                                                    <a target='new' href='produtos/produto.php?cod_produto=$cod_produtoCarrousel_3'>Clique aqui para ver mais</a>
                                                 </div>
                                             </div>";
                     
@@ -228,7 +232,7 @@
                                             <img src='$imagemPath' />
                                             <div class='back_image'>
                                                 <div class='conteudo_image'>
-                                                    <a target='new' href='produtos/produto?cod_produto=$cod_produtoCarrousel_4'>Clique aqui para ver mais</a>
+                                                    <a target='new' href='produtos/produto.php?cod_produto=$cod_produtoCarrousel_4'>Clique aqui para ver mais</a>
                                                 </div>
                                             </div>";
                     
@@ -408,3 +412,7 @@
         alert(busca.value);
     }
 </script>
+
+<?php
+    mysqli_close ($conexao);
+?>
