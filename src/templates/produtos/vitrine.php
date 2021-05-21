@@ -47,6 +47,8 @@
             echo "<script>alert ('Nenhum produto cadastrado nessa categoria!'); </script>";
     }
 
+    mysqli_close ($conexao);
+
     function proximo (int $i) {
         return fmod ($i,3) + 1; 
     }
@@ -173,7 +175,7 @@
                                     <div class='card-body' style='text-align: center;'>
                                         <h5 class='card-title'>$titulo</h5>
                                         <img src='$imagemPath' alt='$titulo' />
-                                        <a href='produto?cod_produto=$cod_produto' class='btn'>Ver produto</a>
+                                        <a href='produto.php?cod_produto=$cod_produto' class='btn'>Ver produto</a>
                                     </div>
                                 </div>
                             </div>";
