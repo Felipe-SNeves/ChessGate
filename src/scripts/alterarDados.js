@@ -7,8 +7,18 @@ function alterarNome () {
         return false;
     }
     else {
-        txtNome.value = usuarioNovo.value;
-        usuarioNovo.value = "";
+        /*txtNome.value = usuarioNovo.value;
+        usuarioNovo.value = "";*/
+        $.ajax ({
+            method: "POST",
+            url: "alterarDados.php",
+            data: { operacao: 1,
+            newData: usuarioNovo.value
+            }
+        }).done ( function (response) {
+            txtNome.value = response;
+            $("span.usuarioNome").html(response);
+        })
         $(".modal").modal('hide');
     }
 }
@@ -23,8 +33,17 @@ function alterarEmail () {
         return false;
   }
   else {
-      txtEmail.value = emailNovo.value;
-      emailNovo.value = "";
+      /*txtEmail.value = emailNovo.value;
+      emailNovo.value = "";*/
+      $.ajax ({
+        method: "POST",
+        url: "alterarDados.php",
+        data: { operacao: 2,
+        newData: emailNovo.value
+        }
+    }).done ( function (response) {
+        txtEmail.value = response;
+    })
       $(".modal").modal('hide');
   }
 }
@@ -50,8 +69,17 @@ function alterarSenha () {
         return false;
     }
 
-    txtSenha.value = senha1.value;
-    senha1.value = senha2.value = "";
+    /*txtSenha.value = senha1.value;
+    senha1.value = senha2.value = "";*/
+    $.ajax ({
+        method: "POST",
+        url: "alterarDados.php",
+        data: { operacao: 3,
+        newData: senha1.value
+        }
+    }).done ( function (response) {
+    })
+    
     $(".modal").modal('hide');
 }
 
@@ -64,8 +92,19 @@ function alterarTelefone () {
         return false;
     }
     else {
-        txtTelefone.value = telefoneNovo.value;
-        telefoneNovo.value = "";
+        /*txtTelefone.value = telefoneNovo.value;
+        telefoneNovo.value = "";*/
+
+        $.ajax ({
+            method: "POST",
+            url: "alterarDados.php",
+            data: { operacao: 4,
+            newData: telefoneNovo.value
+            }
+        }).done ( function (response) {
+            txtTelefone.value = response;
+        })
+
         $(".modal").modal('hide');
     }
 }
@@ -79,8 +118,19 @@ function alterarEndereco () {
         return false;
     }
     else {
-        txtEndereco.value = enderecoNovo.value;
-        enderecoNovo.value = "";
+        /*txtEndereco.value = enderecoNovo.value;
+        enderecoNovo.value = "";*/
+
+        $.ajax ({
+            method: "POST",
+            url: "alterarDados.php",
+            data: { operacao: 5,
+            newData: enderecoNovo.value
+            }
+        }).done ( function (response) {
+            txtEndereco.value = response;
+        })
+
         $(".modal").modal('hide');
     }
 }

@@ -11,7 +11,7 @@
             $email = $_POST["email"];
             $senha = md5 ($_POST["senha"]);
 
-            $query = "SELECT nome, email, senha, fone, endereco FROM cliente
+            $query = "SELECT cod_cliente, nome, email, senha, fone, endereco FROM cliente
             WHERE email LIKE '$email' AND senha LIKE '$senha';";
 
             $resultado = mysqli_query ($conexao, $query);
@@ -25,6 +25,7 @@
                 $_SESSION["email"] = $linha["email"];
                 $_SESSION["fone"] = $linha["fone"];
                 $_SESSION["endereco"] = $linha["endereco"];
+                $_SESSION["cod_cliente"] = $linha["cod_cliente"];
 
                 header ("location: ../home.php");
                 
