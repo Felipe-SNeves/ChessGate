@@ -7,9 +7,14 @@
         $fone = $_SESSION["fone"];
         $endereco = $_SESSION["endereco"];
         $logado = $_SESSION["logado"];
+        $cod_cliente = $_SESSION["cod_cliente"];
     }
-    else
+    else {
         header ("location: entrar.php");
+        exit ();
+    }
+
+    include ('dadosBanco.php');
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +64,7 @@
                             <img src="../../../assets/images/icons/usuario_icone.svg" type="image/svg" alt="Ícone do usuário" />
                             <?php 
                                 if ($logado) {
-                                    echo $nome;
+                                    echo "<span class='usuarioNome'>$nome</span>";
                                 }
                                 else
                                     echo "Entrar";
@@ -120,7 +125,7 @@
                             <p>Caso deseje alterar algum dado associado à conta, comece por aqui!</p>
                                 <p class="config"> 
                                     <button id="btn_usuario" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#trocarUsuario" style="background-color: #b98753;">
-                                    Alterar usuário</button>
+                                    Alterar nome</button>
                                 </p>
                                 <p class="config">
                                    <button id="btn_email" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#trocarEmail" style="background-color: #b98753;">
@@ -151,23 +156,19 @@
                                 <form class="row g-3">
                                     <div class="col-md-6">
                                         <label for="txtNome" class="form-label">Nome</label>
-                                        <input type="text" maxlength="30" class="form-control" id="txtNome" readonly />                             
+                                        <input type="text" value="<?php echo $nome; ?>" maxlength="30" class="form-control" id="txtNome" readonly />                             
                                     </div>
                                     <div class="col-md-6">
                                         <label for="txtEmail" class="form-label">Email</label>
-                                        <input type="email" maxlength="30" class="form-control" id="txtEmail" readonly />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="txtSenha" class="form-label">Senha</label>
-                                        <input type="password" minlength="8" maxlength="30" class="form-control" id="txtSenha" readonly />
+                                        <input type="email" value="<?php echo $email; ?>" maxlength="30" class="form-control" id="txtEmail" readonly />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="txtTelefone" class="form-label">Telefone</label>
-                                        <input type="text" pattern="[0-9]{8,9}" class="form-control" id="txtTelefone" minlength="8" maxlength="9" readonly />
+                                        <input type="text" value="<?php echo $fone; ?>" pattern="[0-9]{8,9}" class="form-control" id="txtTelefone" minlength="8" maxlength="9" readonly />
                                     </div>
                                     <div class="col-md-5">
                                         <label class="form-label" for="txtEndereco">Endereço</label>
-                                        <input type="text" maxlength="40" class="form-control" id="txtEndereco" readonly />
+                                        <input type="text" value="<?php echo $endereco; ?>" maxlength="40" class="form-control" id="txtEndereco" readonly />
                                     </div>
                                 </form>
                             </div>
@@ -361,7 +362,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Informe um novo endereço de email para a conta! Será necessário <b>confirmar</b> o novo email para a modificação ser <b>permanente!</b></p>
+                <p>Informe um novo endereço de email para a conta!</p>
                 <input type="email" id="emailNovo" class="form-control" maxlength="30" required placeholder="Informe o novo endereço de email" />
             </div>
             <div class="modal-footer">

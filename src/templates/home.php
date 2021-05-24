@@ -14,6 +14,7 @@
         $fone = $_SESSION["fone"];
         $endereco = $_SESSION["endereco"];
         $logado = $_SESSION["logado"];
+        $cod_cliente = $_SESSION["cod_cliente"];
     }
 
     $conexao = mysqli_connect ($servidor, $usuario, $senhaBanco, $banco);
