@@ -246,11 +246,9 @@
                             </div>
                             <div class="card-body" style="background-color: #f5ebd5;">
                                 <h5 class="card-title"><?php echo "$tituloProduto - $precoProduto"?></h5>
-                                <form>
-                                    <label class="form-label" for="qntdComprar">Quantidade</label>
-                                    <input type="number" min="0" max="99" step="1" id="qntdComprar" /> <br />
-                                    <button type="submit" class="btn mt-3" style="background-color: #b98753;">Adicionar ao carrinho</button>
-                                </form>
+                                <label class="form-label" for="qntdComprar">Quantidade</label>
+                                <input name="quantidadeProduto" type="number" min="0" max="99" step="1" id="qntdComprar" /> <br />
+                                <a id="addCarrinho" href="../carrinho.php?codigoProduto=<?php echo $codigoProduto;?>&quantidadeProduto=" class="btn mt-3" style="background-color: #b98753;">Adicionar ao carrinho</a>
                             </div>
                         </div>
                     </div>
@@ -372,6 +370,26 @@
     </body>
 
 </html>
+
+<script lang="javascript">
+    $(document).ready (
+        function () {
+            $('#addCarrinho').click (
+                function () {
+                    var newURL = $('#qntdComprar').val();
+                    if (newURL==0) {
+                        alert ('É necessário informar a quantidade desejada');
+                        $('#addCarrinho').attr('href', window.location.href);
+                    }
+                    else {
+                        oldURL = $('#addCarrinho').attr('href');
+                        $('#addCarrinho').attr('href', oldURL + newURL);
+                    }
+                }
+            );
+        }
+    )
+</script>
 
 <script lang="javascript">
     

@@ -9,8 +9,45 @@
         $logado = $_SESSION["logado"];
         $cod_cliente = $_SESSION["cod_cliente"];
     }
-    else
+    else {
         header ("location: home.php");
+        exit();
+    }
+
+    include ('conta/dadosBanco.php');
+
+    $conexao = mysqli_connect ($servidor, $usuario, $senhaBanco, $banco);
+    $cod_pedido = session_id();
+
+    $query = "SELECT c.cod_cliente FROM carrinho c WHERE c.cod_pedido='$cod_pedido'";
+
+    $resultado = mysqli_query ($conexao, $query);
+
+    if (!mysqli_num_rows ($resultado) > 0) {
+        $query = "INSERT INTO carrinho VALUES ('$cod_pedido',$cod_cliente,0.0,'$endereco');";
+
+        mysqli_query ($conexao, $query);
+    }
+
+    if (isset ($_GET["codigoProduto"])) {
+        $prodCod = $_GET["codigoProduto"];
+        $qntdProd = $_GET["quantidadeProduto"];
+
+        $query = "SELECT p.preco FROM produto p WHERE p.cod_produto = $prodCod;";
+
+        $resultado = mysqli_query ($conexao,$query);
+
+        while ($linha = mysqli_fetch_assoc ($resultado)) {
+            $precoItem = $linha["preco"];
+        }
+
+        $sub_PrecoItem = $precoItem * $qntdProd;
+
+        $query = "INSERT INTO itens_carrinho
+        VALUES ($prodCod,'$cod_pedido',$qntdProd,$sub_PrecoItem);";
+
+        mysqli_query ($conexao,$query);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +62,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../styles/estilos.css" />
         <script lang="javascript" type="text/javascript" src="../scripts/alterarEntrega.js"></script>
-        <script lang="javascript" type="text/javascript" src="../scripts/limparEntrega.js"></script>
         <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
         <!-- Inserção do Bootstrap -->
@@ -121,28 +157,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr scope="row">
-                                    <td>Tabuleiro oriental</td>
-                                    <td>1</td>
-                                    <td>R$ 99,99</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Chaveiro real</td>
-                                    <td>2</td>
-                                    <td>R$ 79,98</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Meu sistema</td>
-                                    <td>1</td>
-                                    <td>119,99</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Tabuleiro clássico</td>
-                                    <td>1</td>
-                                    <td>89,99</td>
-                                </tr>
+                                <?php 
+                                    $query = "SELECT p.titulo, i.quantidade, i.preco_sub
+                                    FROM itens_carrinho i INNER JOIN produto p ON p.cod_produto=i.cod_produto
+                                    WHERE i.cod_pedido='$cod_pedido';";
+
+                                    $resultado = mysqli_query ($conexao, $query);
+                                    $precoTotal = 0;
+
+                                    while ($linha = mysqli_fetch_assoc ($resultado)) {
+                                        $tituloProduto = $linha["titulo"];
+                                        $quantidadeProduto = $linha["quantidade"];
+                                        $precoItem = $linha["preco_sub"];
+
+                                        $precoTotal = $precoTotal + $precoItem;
+
+                                        echo "<tr scope='row'>
+                                        <td>$tituloProduto</td>
+                                        <td>$quantidadeProduto</td>
+                                        <td>R$ $precoItem</td>
+                                        </tr>";
+                                    }
+                                ?>
                             </tbody>
                         </table>
+                        <?php
+                            if ($precoTotal==0)
+                                    echo "<h3>O carrinho está vazio!</h3>";
+                        ?>
                     </div>
                     <div id="preco_total">
                         <div class="card">
@@ -151,9 +193,12 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Preço total</h5>
-                                <p class="card-text">O preço total da compra é de R$ 179,97</p>
-                                <a href="#" class="btn" style="background-color: #b98753;">Pagar</a>
-                                <a href="#" class="btn" style="background-color: #b98753;">Limpar</a>
+                                <?php 
+                                    echo "<script>var precoFim = $precoTotal;</script>";
+                                ?>
+                                <p class="card-text">O preço total da compra é de R$ <?php echo $precoTotal; ?></p>
+                                <button onclick="finalizarPedido (precoFim);" class="btn" style="background-color: #b98753;">Pagar</button>
+                                <button onclick="limparCarrinho ();" class="btn" style="background-color: #b98753;">Limpar</button>
                             </div>
                         </div>
                     </div>
@@ -167,6 +212,9 @@
                                 <form>
                                     <label for="enderecoEntrega" class="form-label">Endereço de entrega</label>
                                     <input type="text" maxlength="40" class="form-control" id="enderecoEntrega" value="" readonly />
+                                    <?php
+                                        echo "<script> document.getElementById('enderecoEntrega').value = '$endereco';</script>";
+                                    ?>
                                 </form>
                                 <button style="background-color: #b98753; margin-top: 1%;" id="btn_alterar" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#trocarEndereco">
                                     Alterar endereço
@@ -349,3 +397,7 @@
         </div>
     </div>
 </div>
+
+<?php
+    mysqli_close($conexao);
+?>

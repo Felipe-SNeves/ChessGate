@@ -12,3 +12,29 @@ function alterarEndereco () {
         $(".modal").modal('hide');
     }
 }
+
+function limparCarrinho () {
+    $.ajax ({
+        method: "POST",
+        url: "limparCarrinho.php",
+        data: {}
+    }).done ( function (response) {
+        window.location.href = window.location.href.split("?")[0];
+    })
+}
+
+function finalizarPedido (precoFim) {
+
+    const endEntrega = document.getElementById ('enderecoEntrega').value;
+
+    $.ajax ({
+        method: "POST",
+        url: "finalizarPedido.php",
+        data: {
+            enderecoFinal: endEntrega,
+            precoFinal: precoFim
+        }
+    }).done ( function (response) {
+        alert ('Pedido finalizado e registrado!');
+    })
+}
