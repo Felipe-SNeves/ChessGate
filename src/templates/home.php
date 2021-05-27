@@ -34,6 +34,9 @@
     if ($_GET["cod"]==404) {
         echo "<script>alert ('Produto inexistente!');</script>";
     }
+
+    if($_GET["cod"]==200)
+        echo "<script>alert ('Senha atualizada com sucesso!');</script>";
 ?>
 
 <!DOCTYPE html>
