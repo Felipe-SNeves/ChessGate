@@ -12,26 +12,7 @@
     
     include ("../conta/dadosBanco.php");
 
-    $cod_categoria = $_GET["categoria"];
-
-    if ($_GET["categoria"]==100) {
-        $categoria = "Tabuleiros";
-        $categoriaQuery = "tabuleiro";
-    }
-    else if ($_GET["categoria"]==200) {
-        $categoria = "Livros";
-        $categoriaQuery = "livro";
-    }
-    else if ($_GET["categoria"]==300) {
-        $categoria = "Decorativos";
-        $categoriaQuery = "decorativo";
-    }
-    else if ($_GET["categoria"]==400) {
-        $categoria = "Chaveiros";
-        $categoriaQuery = "chaveiro";
-    }
-    else
-        header ("location: ../home.php");
+    $produtoBusca = $_GET["prod"];
 
     $conexao = mysqli_connect ($servidor, $usuario, $senhaBanco, $banco);
 
@@ -39,13 +20,15 @@
         die ("Conexão falhou: " . mysqli_connection_error ());
     else {
         $query = "SELECT p.cod_produto, p.titulo, p.imagemURL
-        FROM produto p INNER JOIN $categoriaQuery t ON p.cod_produto = t.cod_produto
-        WHERE p.cod_categoria=$cod_categoria;";
+        FROM produto p
+        WHERE p.titulo LIKE '%$produtoBusca%';";
 
         $resultado = mysqli_query ($conexao, $query);
 
         if (mysqli_num_rows($resultado) <= 0)
-            echo "<script>alert ('Nenhum produto cadastrado nessa categoria!'); </script>";
+            $busca = false;
+        else
+            $busca = true;
     }
 
     mysqli_close ($conexao);
@@ -53,7 +36,6 @@
     function proximo (int $i) {
         return fmod ($i,3) + 1; 
     }
-    
 ?>
 
 
@@ -62,7 +44,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>ChessGate - <?php echo $categoria;?></title>
+        <title>ChessGate</title>
         <link rel="shortcut icon" href="../../../assets/images/icons/logo_icone.svg" type="image/svg" />
         <meta name="description" content="Compre seu próximo tabuleiro de xadrez na ChessGate! Entre vários outros produtos!" />
         <meta name="keywords" content="xadrez loja tabuleiro peças shop store decorativo chaveiros livros" />
@@ -78,6 +60,11 @@
         <link rel="preconnect" href="https://fonts.gstatic.com"> 
         <!-- Lora -->
         <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+        <style>
+            .rodape_busca {
+                bottom: 0;
+            }
+        </style>
     </head>
 
     <body id="topo">
@@ -156,37 +143,43 @@
                     <p style="text-align: center;"><?php echo $categoria; ?></p>
                     
                     <?php
-                        $i = 0;
-                        while ($linha = mysqli_fetch_assoc ($resultado)) {
-                            $titulo = $linha["titulo"];
-                            $imagemPath = $linha["imagemURL"];
-                            $cod_produto = $linha["cod_produto"];
-                            
-                            if (proximo($i)==1)
-                                $classe = "pri_col";
-                            else if (proximo($i)==2)
-                                $classe = "seg_col";
-                            else if (proximo($i)==3)
-                                $classe = "ter_col";
+                        
+                        if ($busca) {
+                            $i = 0;
+                            while ($linha = mysqli_fetch_assoc ($resultado)) {
+                                $titulo = $linha["titulo"];
+                                $imagemPath = $linha["imagemURL"];
+                                $cod_produto = $linha["cod_produto"];
+                                
+                                if (proximo($i)==1)
+                                    $classe = "pri_col";
+                                else if (proximo($i)==2)
+                                    $classe = "seg_col";
+                                else if (proximo($i)==3)
+                                    $classe = "ter_col";
 
-                            $i++;
+                                $i++;
 
-                            echo  "<div id='$classe'>
-                                <div class='card'>
-                                    <div class='card-body' style='text-align: center;'>
-                                        <h5 class='card-title'>$titulo</h5>
-                                        <img src='$imagemPath' alt='$titulo' />
-                                        <a href='produto.php?cod_produto=$cod_produto' class='btn'>Ver produto</a>
+                                echo  "<div id='$classe'>
+                                    <div class='card'>
+                                        <div class='card-body' style='text-align: center;'>
+                                            <h5 class='card-title'>$titulo</h5>
+                                            <img src='$imagemPath' alt='$titulo' />
+                                            <a href='produto.php?cod_produto=$cod_produto' class='btn'>Ver produto</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>";
+                                </div>";
+                            }
+                        }
+                        else {
+                            echo "<h2>Nenhum produto corresponde a '$produtoBusca'!</h2>";
                         }
                     ?>
                 </div>
             </main>
 
             <footer>
-                <div id="rodape">
+                <div id="rodape" style="position: <?php if ($busca) echo "relative"; else echo "absolute"; ?>;" >
                     <div id="conteudo_rodape">
                         <div id="p_col">
                             <ul>

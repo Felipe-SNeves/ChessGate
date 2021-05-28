@@ -74,8 +74,8 @@
                     </div>
                     <div id="menu_superior_direita">
                         <span class="pesquisar_icon">
-                            <form onsubmit="pesquisar ()">
-                                <input onsubmit="pesquisar ();" id="pesquisar_input" type="text" placeholder="Pesquisar" style="font-size: 15px; display: none;" />
+                            <form method="get" action="produtos/busca.php">
+                                <input name="prod" id="pesquisar_input" type="text" placeholder="Pesquisar" style="font-size: 15px; display: none;" />
                             </form>
                             <img src="../../assets/images/icons/busca_icone.svg" type="image/svg" alt="Ícone de pesquisa" />
                         </span>
@@ -406,15 +406,6 @@
             busca.value = "";
         }
     })
-</script>
-
-<script lang="javascript">
-
-    function pesquisar () {
-        var busca = document.getElementById("pesquisar_input");
-
-        alert(busca.value);
-    }
 </script>
 
 <?php
