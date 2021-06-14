@@ -39,7 +39,7 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES ('d8ugmtscatrq18ulb7qt3leo7e',1,0.00,'Rua Abcd número 123, apto 44'),('ibmegk5e707ntnb46brrjd1374',1,419.97,'Rua teste 123');
+INSERT INTO `carrinho` VALUES ('385pb83n9ghjenqbvv39u0e4l0',3,0.00,'fsdfdsfsfsdf'),('u22fu9oal4lrj5dm3qphjvnvvf',5,479.98,'Rua teste');
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`cod_cliente`),
   UNIQUE KEY `un_email_cliente` (`email`),
   CONSTRAINT `ck_genero_cliente` CHECK (`genero` in ('M','F','B'))
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Felipe','felpslva5@gmail.com','e7d80ffeefa212b7c5c55700e4f7193e','1998','44556677','M','Rua Abcd número 123, apto 44');
+INSERT INTO `cliente` VALUES (3,'Administrador','a@a.com','25d55ad283aa400af464c76d713c07ad','1992','112233445','M','fsdfdsfsfsdf'),(5,'Teste','felpslva5@gmail.com','7116380afc09045f406dc804a504c4ac','2006','555555555','M','Rua teste');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +187,7 @@ CREATE TABLE `itens_carrinho` (
 
 LOCK TABLES `itens_carrinho` WRITE;
 /*!40000 ALTER TABLE `itens_carrinho` DISABLE KEYS */;
-INSERT INTO `itens_carrinho` VALUES (310,'ibmegk5e707ntnb46brrjd1374',3,419.97);
+INSERT INTO `itens_carrinho` VALUES (311,'u22fu9oal4lrj5dm3qphjvnvvf',2,479.98);
 /*!40000 ALTER TABLE `itens_carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-27  3:13:09
+-- Dump completed on 2021-06-14 18:31:59
